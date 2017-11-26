@@ -1,0 +1,60 @@
+Index: src/components/App.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/App.jsx	(revision )
++++ src/components/App.jsx	(revision )
+@@ -1,6 +1,5 @@
+ import React, {Component} from 'react';
+ import {connect} from 'react-redux';
+-import {bindActionCreators} from 'redux';
+ import {addReminder} from '../actions';
+ 
+ 
+@@ -17,6 +16,23 @@
+         this.props.addReminder(this.state.text);
+     }
+ 
++   /* renderReminders() {
++        const {reminders} = this.props;
++        return (
++            <ul className="list-group col-sm-4">
++                {
++                    reminders.map(reminder => {
++                        return (
++                            <li key={reminder.id} className="list-group-item">
++                                <div>{reminder.text}</div>
++                            </li>
++                        )
++                    })
++                }
++            </ul>
++        )
++    }*/
++
+     render() {
+         return (
+             <div className="App">
+@@ -31,6 +47,7 @@
+                             onChange={event => this.setState({text: event.target.value})}
+                         />
+                     </div>
++                    {/*{this.renderReminders()}*/}
+                     <button
+                         type="button"
+                         className="btn btn-success"
+@@ -43,5 +60,9 @@
+         )
+     }
+ }
+-
+-export default connect(null, {addReminder})(App);
+\ No newline at end of file
++function mapStateToProps(state) {
++    return {
++        reminders: state
++    }
++}
++export default connect(mapStateToProps, {addReminder})(App);
+\ No newline at end of file
